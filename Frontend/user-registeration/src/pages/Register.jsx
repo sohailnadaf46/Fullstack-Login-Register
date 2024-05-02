@@ -18,18 +18,26 @@ const Register = () => {
     try {
       const response  = await axios.post("/register", {name, email, password
       });
-      if(response.data.error){
-        toast.error(response.data.error)
-      }
+
+      if (response.status ===200) {
+          setData({ name: "", email: "", password: "" });
+          toast.success("User Registered successfully");
+          navigate("/login");
+        }
       else{
-        setData([]);
-        toast.success("User Registered successfully");
-        navigate("/login");
+        toast.error("an error occured please try again");
       }
     } catch (error) {
-      console.log(error, "error occured while registering the user")
+      // Handle error response
+      if (error.response && error.response.data) {
+        // Display error message in toast
+        toast.error(error.response.data);
+      } else {
+        // Display generic error message in toast
+        toast.error("An error occurred. Please try again later.");
     }
   
+  }
   }
   return (
     <form onSubmit={handleRegisterSubmit}>

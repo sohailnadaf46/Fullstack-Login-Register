@@ -8,12 +8,11 @@ const registerUser = async (req, res) =>{
       try {
             const { name, email, password } = req.body;
             
-            if (!name) {
-              return res.json("name is required");
-            };
-            if(!password || password.length < 6){
-                  return res.json("password is required its should be atleast 6 characters long")
-            }
+            if (!name || !password || password.length < 6) {
+                  return res.status(400).json("Name and password are required. Password must be at least 6 characters long.");
+             }
+
+
             const existEmail = await User.findOne({email})
 
             if(existEmail){
@@ -25,6 +24,7 @@ const registerUser = async (req, res) =>{
                   email,
                   password
             })
+
             return res.json(user)
             
           } catch (error) {

@@ -1,5 +1,38 @@
+import { User } from "../models/user.model.js"
 const test = (req, res) =>{
       res.json({message: 'the test is working'})
 }
 
-export { test }
+const registerUser = async (req, res) =>{
+
+      try {
+            const { name, email, password } = req.body;
+            
+            if (!name) {
+              return res.json("name is required");
+            };
+            if(!password || password.length < 6){
+                  return res.json("password is required its should be atleast 6 characters long")
+            }
+            const existEmail = await User.findOne({email})
+
+            if(existEmail){
+                  return res.json("email is already registerd")
+            }
+
+            const user = await User.create({
+                  name,
+                  email,
+                  password
+            })
+            return res.json(user)
+            
+          } catch (error) {
+            console.error("Error registering user:", error.message);
+            res.status(400).send(error.message);
+          }
+
+
+}
+
+export { test, registerUser}

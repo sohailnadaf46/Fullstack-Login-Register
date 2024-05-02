@@ -17,3 +17,8 @@ followed by Routes and Route to navigate
 // Backend - packages
 $ npm i express nodemon dotenv cors 
 
+
+// whatever the backend logic is written for user registeration we have to show it to the frontend we do that by installing a package called React toast  read documentation for any doubts
+
+//usenavigation - its mostly used after all the opertation is completed and u want to send the user back to the home page
+

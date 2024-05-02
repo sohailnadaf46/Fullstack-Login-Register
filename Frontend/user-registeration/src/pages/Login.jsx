@@ -4,7 +4,7 @@ import axios from "axios"
 const Login = () => {
 
 const [data, setData] = useState({
-  Email :"",
+  email :"",
   password:""
 });
 
@@ -16,8 +16,8 @@ axios.get("/")
   return (
     <div>
       <form onSubmit={loginUser}>
-        <label>Email</label>
-        <input type='email' placeholder='enter email...' value={data.Email} onChange={(e) => setData({...data, Email:e.target.value})} />
+        <label>email</label>
+        <input type='email' placeholder='enter email...' value={data.email} onChange={(e) => setData({...data, email:e.target.value})} />
         <label>password</label>
         <input type='password' placeholder='enter password' value={data.password} onChange={(e) => setData({...data, password:e.target.value})}/>
         <button type='submit'>Login</button>

@@ -10,3 +10,10 @@ followed by Routes and Route to navigate
 //we have to wrap all the pages with ROutes and route with whom we want the navigation to happen except the Navbar and the footer as their static to all the pages
 
 
+//after creating the endpoints need to import Link the element which helps to link to the pages
+
+
+
+// Backend - packages
+$ npm i express nodemon dotenv cors 
+

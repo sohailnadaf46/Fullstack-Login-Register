@@ -22,3 +22,7 @@ $ npm i express nodemon dotenv cors
 
 //usenavigation - its mostly used after all the opertation is completed and u want to send the user back to the home page
 
+
+using becrypt to hash the password 
+just simple it takes 2 parameters one to hashthe password 
+and then use it while creating the user

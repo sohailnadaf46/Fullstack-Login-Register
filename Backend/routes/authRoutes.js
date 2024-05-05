@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors"
-import { registerUser, test } from "../controllers/auth.controller.js"
+import { registerUser, test, loginUser } from "../controllers/auth.controller.js"
 
 const router  = express.Router();
 
@@ -15,5 +15,6 @@ router.use(express.urlencoded({extended:true}));
 //routes
 router.get("/", test)
 router.post("/register", registerUser)
+router.post("/login", loginUser)
 
 export { router }

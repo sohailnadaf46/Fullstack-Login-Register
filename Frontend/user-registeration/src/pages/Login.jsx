@@ -1,17 +1,45 @@
 import { useState } from "react";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
-
+const navigate = useNavigate();
 const [data, setData] = useState({
   email :"",
   password:""
 });
 
-const loginUser = (e) =>{
-e.preventDefault()
-axios.get("/")
-}
+const loginUser = async (e) => {
+  e.preventDefault();
+
+  try {
+    const { email, password } = data;
+    const response = await axios.post("/login", { email, password });
+
+    if (response.status === 200) {
+      // Successful login
+      toast.success("User logged in successfully");
+      setData({ email: "", password: "" });
+      navigate("/"); 
+    }
+     else {
+      toast.error("an error occured please try again ");
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      // Display error message in toast
+      toast.error(error.response.data);
+    }
+    // Network error or other unexpected errors
+    console.error("Error logging in:", error);
+    // toast.error("Error logging in. Please try again later.");
+  }
+};
+
+
+
+
 
   return (
     <div>

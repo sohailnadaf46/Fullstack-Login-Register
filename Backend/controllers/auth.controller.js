@@ -3,7 +3,7 @@ import { hashPassword, comparePassword } from "../helpers/auth.js"
 const test = (req, res) =>{
       res.json({message: 'the test is working'})
 }
-
+//register Endpoint
 const registerUser = async (req, res) =>{
 
       try {
@@ -37,5 +37,39 @@ const registerUser = async (req, res) =>{
 
 
 }
+//login user endpoint
+const loginUser = async  (req, res) =>{
+      try { 
+            const { email, password} = req.body;
 
-export { test, registerUser}
+            if(!email || !password){
+                 return res.status(400).json("please enter email and password")
+            }
+            
+            const user  = await User.findOne({email});
+
+            if(!user){
+                  return res.status(400).json("user does not exist please register")
+            }
+
+            if(!email){
+                 return  res.status(400).json("user does not exist, please register");
+            }
+
+            //compare the password
+            const passwordMatch =  await comparePassword(password, user.password);
+
+            if(passwordMatch){
+                  return res.status(200).json("User logged in succesfully password match")
+            }
+            if(!passwordMatch){
+                  return res.status(400).json("password do not match")
+            }
+            
+      } catch (error) {
+            console.log("error loggin the user", error)
+            res.status(400).send(error.message)
+      }
+}
+
+export { test, registerUser, loginUser}
